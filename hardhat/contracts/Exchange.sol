@@ -34,7 +34,7 @@ contract Exchange is ERC20 {
             liquidity = (totalSupply() * msg.value) / ethReserve;
             _mint(msg.sender, liquidity);
         }
-
+        return liquidity;
     }
 
 }
