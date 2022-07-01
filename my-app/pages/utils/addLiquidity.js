@@ -4,10 +4,10 @@ import {
   EXCHANGE_CONTRACT_ADDRESS,
   TOKEN_CONTRACT_ABI,
   TOKEN_CONTRACT_ADDRESS,
-} from "../constants";
+} from "../../constants";
 
 
- const addLiquidity = async (signer, addCDToken, addEth) => {
+export const addLiquidity = async (signer, addCDToken, addEth) => {
     try {
         const tokenContract = await Contract(TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, signer);
         const exchangeContract = await Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, signer);
