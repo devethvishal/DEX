@@ -16,9 +16,9 @@ export const getEtherBalance = async (provider, address, contract = false) => {
     }
 }
 
-export const getCDTokenBalance = async (provider, address) => {
+export const getCDTokensBalance = async (provider, address) => {
     try {
-        const tokenContract = await Contract(TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, provider);
+        const tokenContract = new Contract(TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, provider);
         const amount = await tokenContract.balanceOf(address);
         return amount;
     } catch (err) {
@@ -26,9 +26,9 @@ export const getCDTokenBalance = async (provider, address) => {
     }
 }
 
-export const getLPTokenBalance = async (provider, address) => {
+export const getLPTokensBalance = async (provider, address) => {
     try {
-        const exchangeContract = await Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
+        const exchangeContract = new Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
         const amount = await exchangeContract.balanceOf(address);
         return amount;
     } catch (err) {
@@ -37,9 +37,9 @@ export const getLPTokenBalance = async (provider, address) => {
 }
 
 
-export const getCDTokenReserve = async (provider) => {
+export const getReserveOfCDTokens = async (provider) => {
     try {
-        const exchangeContract = await Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
+        const exchangeContract = new Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
         const tokenReserve = await exchangeContract.getReserve();   
         return tokenReserve;    
     } catch (err) {

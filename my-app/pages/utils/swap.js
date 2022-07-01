@@ -1,9 +1,9 @@
 import { Contract } from "ethers";
 import { EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI } from "../../constants";
 
-export const getAmountOfTokenReceivedFromSwap = async (_swapAmountWei, provider, ethSelected, _ethBalance, cdTokenReserved) => {
+export const getAmountOfTokensReceivedFromSwap = async (_swapAmountWei, provider, ethSelected, _ethBalance, cdTokenReserved) => {
     try {
-        const exchangeContract = await Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
+        const exchangeContract = new Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
         if(ethSelected) {
             const amount = await exchangeContract.getAmountOfToken(
                 _swapAmountWei,
@@ -28,8 +28,8 @@ export const getAmountOfTokenReceivedFromSwap = async (_swapAmountWei, provider,
 
 export const swapTokens = async (signer, swapAmountWei, tokenToBeReceivedAfterSwap, ethSelected) => {
     try {
-        const exchangeContract = await Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, signer);
-        const tokenContract = await Contract (TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, signer);
+        const exchangeContract = new Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, signer);
+        const tokenContract = new Contract (TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, signer);
         if(ethSelected) {
             const tx = await exchangeContract.ethToCryptoDevToken(tokenToBeReceivedAfterSwap,{
                 value: swapAmountWei
