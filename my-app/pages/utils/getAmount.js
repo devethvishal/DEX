@@ -1,8 +1,8 @@
 import {Contract} from 'ethers'
 
-import {EXCHANGE_CONTRACT_ABI,EXCHANGE_CONTRACT_ADDRESS,TOKEN_CONTRACT_ADDRESS,TOKEN_CONTRACT_ABI} from '../constants'
+import {EXCHANGE_CONTRACT_ABI,EXCHANGE_CONTRACT_ADDRESS,TOKEN_CONTRACT_ADDRESS,TOKEN_CONTRACT_ABI} from '../../constants'
 
-const getEtherBalance = async (provider, address, contract = false) => {
+export const getEtherBalance = async (provider, address, contract = false) => {
     try {
         if(contract){
             const amount = await provider.getBalance(EXCHANGE_CONTRACT_ADDRESS);
@@ -16,7 +16,7 @@ const getEtherBalance = async (provider, address, contract = false) => {
     }
 }
 
-const getCDTokenBalance = async (provider, address) => {
+export const getCDTokenBalance = async (provider, address) => {
     try {
         const tokenContract = await Contract(TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, provider);
         const amount = await tokenContract.balanceOf(address);
@@ -26,7 +26,7 @@ const getCDTokenBalance = async (provider, address) => {
     }
 }
 
-const getLPTokenBalance = async (provider, address) => {
+export const getLPTokenBalance = async (provider, address) => {
     try {
         const exchangeContract = await Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
         const amount = await exchangeContract.balanceOf(address);
@@ -37,7 +37,7 @@ const getLPTokenBalance = async (provider, address) => {
 }
 
 
-const getCDTokenReserve = async (provider) => {
+export const getCDTokenReserve = async (provider) => {
     try {
         const exchangeContract = await Contract(EXCHANGE_CONTRACT_ADDRESS, EXCHANGE_CONTRACT_ABI, provider);
         const tokenReserve = await exchangeContract.getReserve();   
